@@ -1,4 +1,4 @@
-# Install MongoDB Sharding Cluster
+# Install MongoDB Sharding Cluster (version 4.4)
 
 ![Azure Public Test Date](https://azurequickstartsservice.blob.core.windows.net/badges/mongodb-sharding-centos/PublicLastTestDate.svg)
 ![Azure Public Test Result](https://azurequickstartsservice.blob.core.windows.net/badges/mongodb-sharding-centos/PublicDeployment.svg)
@@ -67,7 +67,7 @@ Each VM of the shard uses raid0 to improve performance. The number and the size 
   Before adding your own replica set into the sharding cluster, you should enable internal authentication in your replica set first, and make sure the replica set is accessiable through this sharding cluster.
 
 ##Known Limitations
-- The MongoDB version is 3.2.
+- The MongoDB version is 4.4.
 - We expose 2 router server nodes on public addresses so that you can access MongoDB service through internet directly.
 - This cluster only has 2 shards, you can add more shards after the deployment. 
 - The nodes use internal authentication. So if you want to add your own replica set into this sharding cluster, you should enable the internal authentication in your replica set first. Check any node /etc/mongokeyfile for more details.
