@@ -4,7 +4,7 @@ mongoAdminUser=$1
 mongoAdminPasswd=$2
 zabbixServer=$3
 
-install_mongo3() {
+install_mongo4() {
 #create repo
 cat > /etc/yum.repos.d/mongodb-org-4.4.repo <<EOF
 [mongodb-org-4.4]
@@ -70,7 +70,7 @@ install_zabbix() {
 	/etc/init.d/zabbix_agentd start
 }
 
-install_mongo3
+install_mongo4
 #install_zabbix
 
 
