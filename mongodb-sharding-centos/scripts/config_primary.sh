@@ -6,10 +6,10 @@ zabbixServer=$3
 
 install_mongo3() {
 #create repo
-cat > /etc/yum.repos.d/mongodb-org-3.2.repo <<EOF
-[mongodb-org-3.2]
+cat > /etc/yum.repos.d/mongodb-org-4.4.repo <<EOF
+[mongodb-org-4.4]
 name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/3.2/x86_64/
+baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/4.4/x86_64/
 gpgcheck=0
 enabled=1
 EOF
@@ -71,7 +71,7 @@ install_zabbix() {
 }
 
 install_mongo3
-install_zabbix
+#install_zabbix
 
 
 
