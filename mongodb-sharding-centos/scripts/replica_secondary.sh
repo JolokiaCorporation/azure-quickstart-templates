@@ -13,6 +13,9 @@ gpgcheck=0
 enabled=1
 EOF
 
+        #touch replica
+        touch /MongoReplicaSecondary
+
 	#install
 	yum install -y mongodb-org
 
