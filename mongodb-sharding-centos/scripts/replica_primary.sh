@@ -105,7 +105,7 @@ disk_format
 
 
 #start mongod
-mongod --dbpath /var/lib/mongo/ --logpath /var/log/mongodb/mongod.log --fork
+mongod --dbpath /var/lib/mongo/ --logpath /var/log/mongodb/mongod.log --fork --bind_ip_all
 
 sleep 30
 n=`ps -ef |grep "mongod --dbpath /var/lib/mongo/" |grep -v grep |wc -l`
@@ -155,7 +155,7 @@ else
 fi
 
 #restart mongod with auth and replica set
-mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf
+mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf --bind_ip_all
 
 
 
@@ -170,7 +170,7 @@ do
 		echo "mongo replica set started successfully"
 		break
 	else
-		mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf
+		mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf --bind_ip_all
 		continue
 	fi
 done
@@ -232,7 +232,7 @@ if [[ ! -d /var/run/mongodb ]];then
 mkdir /var/run/mongodb
 chown -R mongod:mongod /var/run/mongodb
 fi
-mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf
+mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf --bind_ip_all
 }
 stop() {
 pkill mongod
