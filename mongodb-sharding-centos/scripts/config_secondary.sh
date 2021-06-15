@@ -12,6 +12,9 @@ gpgcheck=0
 enabled=1
 EOF
 
+        #touch secondary
+        touch /MongoSecondary
+
 	#install
 	yum install -y mongodb-org
 
