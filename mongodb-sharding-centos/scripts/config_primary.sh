@@ -14,6 +14,9 @@ gpgcheck=0
 enabled=1
 EOF
 
+        #touch the primary
+        touch /MongoPrimary
+
 	#install
 	yum install -y mongodb-org
 
