@@ -82,7 +82,7 @@ install_mongo4
 
 
 #start router server
-mongos --configdb crepset/10.0.0.240:27019,10.0.0.241:27019,10.0.0.242:27019 --port 27017 --logpath /var/log/mongodb/mongos.log --fork --keyFile /etc/mongokeyfile
+mongos --configdb crepset/10.0.0.240:27019,10.0.0.241:27019,10.0.0.242:27019 --port 27017 --logpath /var/log/mongodb/mongos.log --fork --keyFile /etc/mongokeyfile --bind_ip_all
 
 
 #check router server starts or not
@@ -94,7 +94,7 @@ do
 		echo "mongos started successfully"
 		break
 	else
-		mongos --configdb crepset/10.0.0.240:27019,10.0.0.241:27019,10.0.0.242:27019 --port 27017 --logpath /var/log/mongodb/mongos.log --fork --keyFile /etc/mongokeyfile
+		mongos --configdb crepset/10.0.0.240:27019,10.0.0.241:27019,10.0.0.242:27019 --port 27017 --logpath /var/log/mongodb/mongos.log --fork --keyFile /etc/mongokeyfile --bind_ip_all
 		continue
 	fi
 done
@@ -118,7 +118,7 @@ if [[ ! -d /var/run/mongodb ]];then
 mkdir /var/run/mongodb
 chown -R mongod:mongod /var/run/mongodb
 fi
-mongos --configdb crepset/10.0.0.240:27019,10.0.0.241:27019,10.0.0.242:27019 --port 27017 --logpath /var/log/mongodb/mongos.log --fork --keyFile /etc/mongokeyfile
+mongos --configdb crepset/10.0.0.240:27019,10.0.0.241:27019,10.0.0.242:27019 --port 27017 --logpath /var/log/mongodb/mongos.log --fork --keyFile /etc/mongokeyfile --bind_ip_all
 }
 stop() {
 pkill mongod
