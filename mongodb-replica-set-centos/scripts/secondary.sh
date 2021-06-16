@@ -104,9 +104,75 @@ install_zabbix() {
 
 }
 
+configure_tls() {
+cat > /etc/mongod.pem <<EOF
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA35kpki5roVWq5GBRzV818zg/i6xbPW2HxAwZTNGBQ4rG9nME
+jqnPaJB3wB5fgGiyVZPzPGB+YTYT4Cc+Kr40AgqRj11R5tba07CV3ziRR0IBHzHS
+kSgqS9Xob8MlICXVEey/ukC5qM2CIo2FNQooi25v93fIYFIQxDX/U9sdVs3EPjap
+U/kBYGwWchFjrJbtUw078I8Wvs54vLkhZooI3DJKYkw7OLhyvru58e+PgKpZ3UAT
+F/Jvp0d3pEfmeLfIadvg0+o9B13SXSFA0aDTKGDH/7TmBEkcmi14xbF7HroBQ6oJ
+/0AUdcShvyy2ENDKrqNYwommDG7FvwhrCY/adQIDAQABAoIBAQCgzenTs4a8NHv+
+Wjb6V+rYzC8HKCFGACuPlpPrZxBrnraQLw+r+fur25oDlNRh6Om4GfroBQ1epCGP
+JynSW4/Tl/4u+JIaTZJ6g5iFPI1ejd14rcAdnKEugNv05Icio5KknXsVW88p0wIw
+D08pYfDetcHYW1DD1MEyGxNRH1fuQBzYb4rrWY/qR5dOcnod2G/BNNjAHd9PaIb4
+pXQOlCAfXjAnkE6t/krnQIdEMuKqWQVlJ1bMYaDk6rsHty82V7oEIMjmHcuA98Up
+zKqe0UeAbV49jzeb+EFjFUhDx/Li7bd4qzJOo1CKFOwNSG9n6wsWP6xL3yw4CSIU
+7BzUdpOBAoGBAPn72wJHniqpF0l+EX2QAdN9TrtROHgm1xMx69VsKmqxHKoPGzg9
+vg9MWc+xRL2xnsjLKxjJ2QWXzIEjDBHHQLbBZJ2lYq/2JNmm8o5OVfqhFDW9Yv/i
+pZ0HdhzHV4z1UwwlSmMnkh+0Ry9u6/RZHxxv3469efAaK525qvD1ckW5AoGBAOT6
+vw2wXQl9vNxNb867hH5PTI89KkH3whbdfVcqtp3d7BENg1HxU4xIoLY8cNEVyZXn
+XT1J3D+BuAOMioHdVgsN2M68NpciG5YLXGgwtiklLcVSTXBQhkp6Uy7teAdC+H0G
+X5eUqsRMfIW/GPNWm6fZxDAoPS7mhdgk6+H4X9idAoGAUJU1Zii7/biAPzqaXMV9
+MTWlmZB3CZRLpG5lPWkey0HIobE47wpIKBpOoTrdk+Cb9NI5VEZM5Ran38DydRCr
+9b2lt4PGqj5IZrkAW4s5AA/IugIQ1bez90iedGx19oRmfvXOYuQwoHO2tr2k5iGM
+e9g8UoEVu6ZUBQYC6qXUblECgYBQFzB6TkTMjBFiESfZbJd0QrJpq6A7QLi/nKs5
+sPP9FeF7OXnEUJ/DgqfL9ioTyAYhi7J+PHZwNCQ0AZV0xQFSjn5WGVkS1dhGTCT/
+QIKGs71ltlrlvRSrukucL217RL57pJ4M+/AbBxHLCkNk4ddCB5Zqrbhwzirkpk1n
+VaPYtQKBgGuuLWE8cTk2MdPFXgNxzxaoqi9QbAWAg7JbArG927J59I10iz8nL8x9
+Fino9MNrhl6yg0Y+5EOQQljUSRXRnvrj15+xxHPfkx5COP0ogPRjMu0TKJ0V1gRa
+jyNTo2K/I0lkoYb99VVYG668ZggXFbNgtcqetvlwc4ua+i04ePRY
+-----END RSA PRIVATE KEY-----
+-----BEGIN CERTIFICATE-----
+MIIDTDCCAjQCCQD6XFmoQlJqUjANBgkqhkiG9w0BAQsFADBoMQswCQYDVQQGEwJV
+UzETMBEGA1UECAwKQ2FsaWZvcm5pYTETMBEGA1UEBwwKU2FudGEgQ3J1ejENMAsG
+A1UECgwEU2VsZjEMMAoGA1UECwwDT3BzMRIwEAYDVQQDDAlsb2NhbGhvc3QwHhcN
+MTgwMzA1MjM0NjU3WhcNMjgwMzAyMjM0NjU3WjBoMQswCQYDVQQGEwJVUzETMBEG
+A1UECAwKQ2FsaWZvcm5pYTETMBEGA1UEBwwKU2FudGEgQ3J1ejENMAsGA1UECgwE
+U2VsZjEMMAoGA1UECwwDT3BzMRIwEAYDVQQDDAlsb2NhbGhvc3QwggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDfmSmSLmuhVarkYFHNXzXzOD+LrFs9bYfE
+DBlM0YFDisb2cwSOqc9okHfAHl+AaLJVk/M8YH5hNhPgJz4qvjQCCpGPXVHm1trT
+sJXfOJFHQgEfMdKRKCpL1ehvwyUgJdUR7L+6QLmozYIijYU1CiiLbm/3d8hgUhDE
+Nf9T2x1WzcQ+NqlT+QFgbBZyEWOslu1TDTvwjxa+zni8uSFmigjcMkpiTDs4uHK+
+u7nx74+AqlndQBMX8m+nR3ekR+Z4t8hp2+DT6j0HXdJdIUDRoNMoYMf/tOYESRya
+LXjFsXseugFDqgn/QBR1xKG/LLYQ0Mquo1jCiaYMbsW/CGsJj9p1AgMBAAEwDQYJ
+KoZIhvcNAQELBQADggEBAK/MXW0VjAP0VZWz9yXH22kTg5FRyu88g7A9MJrqqd8y
+wrbOVC/JKIfRvXQPLVBeravmR4OoC0wWSHt2BTJ6tNa/34eeVN/OL0/7wbAfqU4y
+WGRiYPYOWS+8BHW4++M7UJE+iVltWIXQ/rMgDynB4+/tMm41rdNupvjLMM/ExNN/
+gPNEpfvX2eeuihX2Jnnr1g9yl/sYKHc7v5GAPBtUzPlxGXAyjKd+pLhJSl1fruP6
+MlItEv1ZkZj5G+3jJDFPshdGFxCAOpOUCL6qNzuN6DtCF18BhHfHT8fpbJTsLrkU
+VAfh0dacQSKnaUIICvgFqAhJEslEzkzNU0eaeRt2Woc=
+-----END CERTIFICATE-----
+EOF
+
+    sed -i '/^# network inter.*/d' /etc/mongod.conf
+	sed -i '/^net/d' /etc/mongod.conf
+	sed -i '/^  port/d' /etc/mongod.conf
+	sed -i '/^  #bindIp.*/d' /etc/mongod.conf
+    echo "# network inferfaces" >> /etc/mongod.conf
+	echo "net:" >> /etc/mongod.conf
+	echo "  port: 27017" >> /etc/mongod.conf
+	echo "  tls:" >> /etc/mongod.conf
+	echo "    mode: preferTLS" >> /etc/mongod.conf
+	echo "    certificateFile: /etc/mongod.pem" >> /etc/mongod.conf
+
+}
+
 install_mongo4
 disk_format
 #install_zabbix
+#set tls
+configure_tls
 
 #start replica set
 mongod --dbpath /var/lib/mongo/ --config /etc/mongod.conf --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --bind_ip_all
