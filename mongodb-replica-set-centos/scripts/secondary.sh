@@ -10,7 +10,7 @@ disk_format() {
 	yum install wget -y
 	for ((j=1;j<=3;j++))
 	do
-		wget https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/shared_scripts/ubuntu/vm-disk-utils-0.1.sh
+		wget https://raw.githubusercontent.com/JolokiaCorporation/azure-quickstart-templates/master/mongodb-sharding-centos/scripts/vm-disk-utils-0.1.sh
 		if [[ -f /tmp/vm-disk-utils-0.1.sh ]]; then
 			bash /tmp/vm-disk-utils-0.1.sh -b /var/lib/mongo -s
 			if [[ $? -eq 0 ]]; then
@@ -28,12 +28,12 @@ disk_format() {
 }
 
 
-install_mongo3() {
+install_mongo4() {
 #create repo
-cat > /etc/yum.repos.d/mongodb-org-3.2.repo <<EOF
-[mongodb-org-3.2]
+cat > /etc/yum.repos.d/mongodb-org-4.4.repo <<EOF
+[mongodb-org-4.4]
 name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/3.2/x86_64/
+baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/4.4/x86_64/
 gpgcheck=0
 enabled=1
 EOF
@@ -104,12 +104,12 @@ install_zabbix() {
 
 }
 
-install_mongo3
+install_mongo4
 disk_format
-install_zabbix
+#install_zabbix
 
 #start replica set
-mongod --dbpath /var/lib/mongo/ --config /etc/mongod.conf --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork
+mongod --dbpath /var/lib/mongo/ --config /etc/mongod.conf --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --bind_ip_all
 
 
 #check if mongod started or not
@@ -135,7 +135,7 @@ if [[ ! -d /var/run/mongodb ]];then
 mkdir /var/run/mongodb
 chown -R mongod:mongod /var/run/mongodb
 fi
-mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf
+mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf --bind_ip_all
 }
 stop() {
 pkill mongod

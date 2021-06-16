@@ -1,4 +1,4 @@
-# Install MongoDB Replica Set
+# Install MongoDB Replica Set (version 4.4)
 
 ![Azure Public Test Date](https://azurequickstartsservice.blob.core.windows.net/badges/mongodb-replica-set-centos/PublicLastTestDate.svg)
 ![Azure Public Test Result](https://azurequickstartsservice.blob.core.windows.net/badges/mongodb-replica-set-centos/PublicDeployment.svg)
@@ -70,7 +70,7 @@ Each VM of the replica set uses raid0 to improve performance. We use 4 data disk
 - 2.2 If db.mycol.find() command can show the result like primary node does, then means the replica set works.
 
 ##Known Limitations
-- The MongoDB version is 3.2.
+- The MongoDB version is 4.3.
 - We expose all the nodes on public addresses so that you can access MongoDB service through internet directly.
 - MongoDB suggests that the replica set has an odd number of voting members. So the number of secondary nodes is better to set to even number, like 2, 4 or 6, then plus the primary node, fill the requirement that the replica set has an odd number of voting members.
 - A replica set can have up to 50 members, but only 7 voting members. So the maximum number of secondary nodes is 6.
