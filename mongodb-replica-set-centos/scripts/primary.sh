@@ -46,7 +46,7 @@ disk_format() {
 	yum install wget -y
 	for ((j=1;j<=3;j++))
 	do
-		wwget https://raw.githubusercontent.com/JolokiaCorporation/azure-quickstart-templates/master/mongodb-replica-set-centos/scripts/vm-disk-utils-0.1.sh
+		wget https://raw.githubusercontent.com/JolokiaCorporation/azure-quickstart-templates/master/mongodb-replica-set-centos/scripts/vm-disk-utils-0.1.sh
 		if [[ -f /tmp/vm-disk-utils-0.1.sh ]]; then
 			bash /tmp/vm-disk-utils-0.1.sh -b /var/lib/mongo -s
 			if [[ $? -eq 0 ]]; then
