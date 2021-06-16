@@ -318,7 +318,7 @@ check_mdadm() {
 DISKS=$(scan_for_new_disks)
 
 if [ "$RAID_CONFIGURATION" -eq 1 ]; then
-    check_mdadm
+    #check_mdadm
     create_striped_volume "${DISKS[@]}"
 else
     scan_partition_format
