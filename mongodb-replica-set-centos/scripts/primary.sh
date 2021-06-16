@@ -164,7 +164,7 @@ for((i=1;i<=3;i++))
             echo "mongo replica set started successfully"
             break
         else
-            mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf
+            mongod --dbpath /var/lib/mongo/ --replSet $replSetName --logpath /var/log/mongodb/mongod.log --fork --config /etc/mongod.conf --bind_ip_all
             continue
         fi
     done
@@ -189,7 +189,7 @@ echo "the ip address is $finalIp"
 mongo<<EOF
 use admin
 db.auth("$mongoAdminUser", "$mongoAdminPasswd")
-config ={_id:"$replSetName",members:[{_id:0,host:"$finalIp:27017"}]}
+config ={_id:"$replSetName",members:[{_id:0,host:"nt-ar-mongo-us.eastus.cloudapp.azure.com:27017"}]}
 rs.initiate(config)
 exit
 EOF
@@ -203,8 +203,10 @@ fi
 #add secondary nodes
 for((i=1;i<=$secondaryNodes;i++))
     do
-        let a=3+$i
-        mongo -u "$mongoAdminUser" -p "$mongoAdminPasswd" "admin" --eval "printjson(rs.add('10.0.1.${a}:27017'))"
+        #let a=3+$i
+        #mongo -u "$mongoAdminUser" -p "$mongoAdminPasswd" "admin" --eval "printjson(rs.add('10.0.1.${a}:27017'))"
+		let a=$i-1
+		mongo -u "$mongoAdminUser" -p "$mongoAdminPasswd" "admin" --eval "printjson(rs.add('nt-ar-mongo-ussecondary${a}.eastus.cloudapp.azure.com:27017'))"
         if [[ $? -eq 0 ]];then
             echo "adding server 10.0.1.${a} successfully"
         else
